@@ -19,7 +19,7 @@
     <tr th:each="recipe : ${recipes}">
         <td th:text="${recipe.getDescription()}">Description Placeholder</td>
         <td th:text="${recipe.getUrl()}">URL Placeholder</td>
-        <td th:text="${recipe.getNote().getRecipeNotes()}">Note Placeholder</td>
+        <td th:text="${recipe.getNotes().getRecipeNotes()}">Note Placeholder</td>
         <td th:text="${recipe.getCategories()[0].getDescription()}">Category Placeholder</td>
     </tr>
     </tbody>
