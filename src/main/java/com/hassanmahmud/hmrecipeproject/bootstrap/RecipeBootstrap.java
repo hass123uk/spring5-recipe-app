@@ -13,15 +13,15 @@ import java.math.BigDecimal;
 import java.util.*;
 
 @Component
-public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
+public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
     private final CategoryRepository categoryRepository;
     private final UnitOfMeasureRepository unitOfMeasureRepository;
     private final RecipeRepository recipeRepository;
 
-    public DataLoader(CategoryRepository categoryRepository,
-                      UnitOfMeasureRepository unitOfMeasureRepository,
-                      RecipeRepository recipeRepository) {
+    public RecipeBootstrap(CategoryRepository categoryRepository,
+                           UnitOfMeasureRepository unitOfMeasureRepository,
+                           RecipeRepository recipeRepository) {
         this.categoryRepository = categoryRepository;
         this.unitOfMeasureRepository = unitOfMeasureRepository;
         this.recipeRepository = recipeRepository;
