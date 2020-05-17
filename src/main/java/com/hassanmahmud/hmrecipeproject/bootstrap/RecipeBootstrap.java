@@ -4,14 +4,20 @@ import com.hassanmahmud.hmrecipeproject.domain.*;
 import com.hassanmahmud.hmrecipeproject.repositories.CategoryRepository;
 import com.hassanmahmud.hmrecipeproject.repositories.RecipeRepository;
 import com.hassanmahmud.hmrecipeproject.repositories.UnitOfMeasureRepository;
-import org.springframework.boot.CommandLineRunner;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
+@Slf4j
+@RequiredArgsConstructor
 @Component
 public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
@@ -19,17 +25,12 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
     private final UnitOfMeasureRepository unitOfMeasureRepository;
     private final RecipeRepository recipeRepository;
 
-    public RecipeBootstrap(CategoryRepository categoryRepository,
-                           UnitOfMeasureRepository unitOfMeasureRepository,
-                           RecipeRepository recipeRepository) {
-        this.categoryRepository = categoryRepository;
-        this.unitOfMeasureRepository = unitOfMeasureRepository;
-        this.recipeRepository = recipeRepository;
-    }
-
     @Override
+    @Transactional
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
-        recipeRepository.saveAll(getRecipes());
+        var recipes = getRecipes();
+        log.debug("Recipes created and about to be saved.");
+        recipeRepository.saveAll(recipes);
     }
 
     private List<Recipe> getRecipes() {
