@@ -33,6 +33,7 @@ public class Recipe {
     private Byte[] image;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
+    @Builder.Default
     private Set<Ingredient> ingredients = new HashSet<>();
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -45,6 +46,7 @@ public class Recipe {
     @JoinTable(name = "recipe_categories",
             joinColumns = @JoinColumn(name = "recipe_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
+    @Builder.Default
     private Set<Category> categories = new HashSet<>();
 
     public void setNotes(Notes notes) {
