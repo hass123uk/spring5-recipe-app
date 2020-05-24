@@ -11,6 +11,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
 
+import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -66,15 +67,26 @@ class IndexControllerTest {
 
     @Test
     void getRecipePage_validId_returnRecipe() throws Exception {
-        var recipe = Recipe.builder().id(1L).build();
+        var recipe = Optional.of(Recipe.builder().id(1L).build());
 
         when(recipeService.getById(1L)).thenReturn(recipe);
 
         var indexMockMvc = MockMvcBuilders.standaloneSetup(indexController).build();
 
-        indexMockMvc.perform(get("/recipe/" + recipe.getId()))
+        indexMockMvc.perform(get("/recipe/1"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("recipe"))
-                .andExpect(model().attribute("recipe", recipe));
+                .andExpect(model().attribute("recipe", recipe.get()));
+    }
+
+
+    @Test
+    void getRecipePage_invalidId_return404() throws Exception {
+        when(recipeService.getById(1L)).thenReturn(Optional.empty());
+
+        var indexMockMvc = MockMvcBuilders.standaloneSetup(indexController).build();
+
+        indexMockMvc.perform(get("/recipe/1"))
+                .andExpect(status().isNotFound());
     }
 }
