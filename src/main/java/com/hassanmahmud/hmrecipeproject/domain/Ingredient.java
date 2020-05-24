@@ -27,11 +27,16 @@ public class Ingredient {
     @OneToOne
     private UnitOfMeasure unitOfMeasure;
 
-    public Ingredient(){}
+    public Ingredient() {
+    }
 
     public Ingredient(String description, BigDecimal amount, UnitOfMeasure unitOfMeasure) {
         this.description = description;
         this.amount = amount;
         this.unitOfMeasure = unitOfMeasure;
+    }
+
+    public String prettyPrint() {
+        return String.format("%s %s: %s", amount.stripTrailingZeros(), unitOfMeasure.getDescription(), description);
     }
 }

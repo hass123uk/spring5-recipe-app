@@ -14,11 +14,139 @@
     <title>Recipe</title>
 </head>
 <body>
-
-<div class="container-fluid">
-    <h1 th:text="${recipe.getId()}">
-        ID placeholder
-    </h1>
+<div class="container">
+    <div class="card my-4">
+        <div class="card-header" th:text="${recipe.getDescription()}">
+            Recipe description placeholder.
+        </div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-3 pt-3">
+                    <h5>Categories</h5>
+                </div>
+                <div class="col-9">
+                    <ul class="list-group list-group-horizontal">
+                        <li class="list-group-item"
+                            th:each="category : ${recipe.getCategories()}"
+                            th:text="${category.getDescription()}">
+                            Category Description Placeholder
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <h5>Preparation time</h5>
+                </div>
+                <div class="col-3">
+                    <p th:text="${recipe.getPrepTime() + ' minutes'}">30 minutes</p>
+                </div>
+                <div class="col-3">
+                    <h5>Cooking time</h5>
+                </div>
+                <div class="col-3">
+                    <p th:text="${recipe.getCookTime()} + ' minutes'">30 minutes</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <h5>Difficulty</h5>
+                </div>
+                <div class="col-3">
+                    <p th:text="${recipe.getDifficulty()}">EASY</p>
+                </div>
+                <div class="col-3">
+                    <h5>Source URL</h5>
+                </div>
+                <div class="col-3">
+                    <a target="_blank"
+                       th:href="${recipe.getUrl()}"
+                       th:text="${recipe.getSource()}">source!!</a>
+                </div>
+            </div>
+            <div class="row">
+            </div>
+        </div>
+    </div>
+    <div class="card my-4">
+        <div class="card-header">
+            Ingredients
+        </div>
+        <div class="card-body">
+            <ul class="list-group">
+                <li class="list-group-item"
+                    th:each="ingredient : ${recipe.getIngredients()}"
+                    th:text="${ingredient.prettyPrint()}">1 Cup of Milk
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="card my-4">
+        <div class="card-header">
+            Directions
+        </div>
+        <div class="card-body">
+            <p th:text="${recipe.getDirections()}">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae congue mauris rhoncus aenean vel elit
+                scelerisque. Consequat id porta nibh venenatis cras sed. A cras semper auctor neque. Sed risus pretium
+                quam vulputate dignissim. Egestas quis ipsum suspendisse ultrices gravida dictum fusce. A cras semper
+                auctor neque vitae tempus quam pellentesque. Enim ut tellus elementum sagittis vitae et. Viverra
+                maecenas accumsan lacus vel facilisis volutpat est. Dui ut ornare lectus sit amet. Ipsum a arcu cursus
+                vitae congue mauris. Vitae ultricies leo integer malesuada nunc vel. Purus faucibus ornare suspendisse
+                sed nisi lacus sed. Tristique senectus et netus et malesuada fames ac. Tincidunt id aliquet risus
+                feugiat in ante metus. Suscipit tellus mauris a diam maecenas sed enim.<br><br>
+                Viverra aliquet eget sit amet. Amet porttitor eget dolor morbi non arcu. Morbi tempus iaculis urna id
+                volutpat lacus laoreet. Vel fringilla est ullamcorper eget nulla facilisi etiam dignissim. Mauris
+                commodo quis imperdiet massa tincidunt nunc pulvinar. Est placerat in egestas erat imperdiet sed euismod
+                nisi. Nunc sed augue lacus viverra vitae congue eu consequat ac. Donec massa sapien faucibus et. Duis at
+                consectetur lorem donec massa sapien faucibus et. Convallis aenean et tortor at risus. Quam viverra orci
+                sagittis eu volutpat odio facilisis mauris sit. Elementum sagittis vitae et leo duis ut diam quam nulla.
+                Arcu bibendum at varius vel. Commodo quis imperdiet massa tincidunt nunc.<br><br>
+                Orci sagittis eu volutpat odio facilisis mauris sit amet massa. Ipsum a arcu cursus vitae congue mauris
+                rhoncus aenean. Ut tellus elementum sagittis vitae et leo duis. Dui nunc mattis enim ut. Nunc aliquet
+                bibendum enim facilisis gravida. Et odio pellentesque diam volutpat commodo sed egestas egestas. Neque
+                egestas congue quisque egestas diam in arcu cursus. Quis commodo odio aenean sed adipiscing diam donec.
+                Morbi leo urna molestie at elementum eu facilisis sed odio. At imperdiet dui accumsan sit amet. Sapien
+                pellentesque habitant morbi tristique senectus. Commodo nulla facilisi nullam vehicula ipsum a arcu
+                cursus vitae. Nulla facilisi nullam vehicula ipsum a arcu. Id velit ut tortor pretium viverra
+                suspendisse potenti. Faucibus in ornare quam viverra orci sagittis eu volutpat. Arcu felis bibendum ut
+                tristique. Orci phasellus egestas tellus rutrum tellus pellentesque. Ornare lectus sit amet est.
+                Suspendisse ultrices gravida dictum fusce ut.</p>
+        </div>
+    </div>
+    <div class="card my-4">
+        <div class="card-header">
+            Notes
+        </div>
+        <div class="card-body">
+            <p th:text="${recipe.getNotes().getRecipeNotes()}">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae congue mauris rhoncus aenean
+                vel elit scelerisque. Consequat id porta nibh venenatis cras sed. A cras semper auctor neque. Sed risus
+                pretium quam vulputate dignissim. Egestas quis ipsum suspendisse ultrices gravida dictum fusce. A cras
+                semper auctor neque vitae tempus quam pellentesque. Enim ut tellus elementum sagittis vitae et. Viverra
+                maecenas accumsan lacus vel facilisis volutpat est. Dui ut ornare lectus sit amet. Ipsum a arcu cursus
+                vitae congue mauris. Vitae ultricies leo integer malesuada nunc vel. Purus faucibus ornare suspendisse
+                sed nisi lacus sed. Tristique senectus et netus et malesuada fames ac. Tincidunt id aliquet risus
+                feugiat in ante metus. Suscipit tellus mauris a diam maecenas sed enim.<br><br>
+                Viverra aliquet eget sit amet. Amet porttitor eget dolor morbi non arcu. Morbi tempus iaculis urna id
+                volutpat lacus laoreet. Vel fringilla est ullamcorper eget nulla facilisi etiam dignissim. Mauris
+                commodo quis imperdiet massa tincidunt nunc pulvinar. Est placerat in egestas erat imperdiet sed euismod
+                nisi. Nunc sed augue lacus viverra vitae congue eu consequat ac. Donec massa sapien faucibus et. Duis at
+                consectetur lorem donec massa sapien faucibus et. Convallis aenean et tortor at risus. Quam viverra orci
+                sagittis eu volutpat odio facilisis mauris sit. Elementum sagittis vitae et leo duis ut diam quam nulla.
+                Arcu bibendum at varius vel. Commodo quis imperdiet massa tincidunt nunc.<br><br>
+                Orci sagittis eu volutpat odio facilisis mauris sit amet massa. Ipsum a arcu cursus vitae congue mauris
+                rhoncus aenean. Ut tellus elementum sagittis vitae et leo duis. Dui nunc mattis enim ut. Nunc aliquet
+                bibendum enim facilisis gravida. Et odio pellentesque diam volutpat commodo sed egestas egestas. Neque
+                egestas congue quisque egestas diam in arcu cursus. Quis commodo odio aenean sed adipiscing diam donec.
+                Morbi leo urna molestie at elementum eu facilisis sed odio. At imperdiet dui accumsan sit amet. Sapien
+                pellentesque habitant morbi tristique senectus. Commodo nulla facilisi nullam vehicula ipsum a arcu
+                cursus vitae. Nulla facilisi nullam vehicula ipsum a arcu. Id velit ut tortor pretium viverra
+                suspendisse potenti. Faucibus in ornare quam viverra orci sagittis eu volutpat. Arcu felis bibendum ut
+                tristique. Orci phasellus egestas tellus rutrum tellus pellentesque. Ornare lectus sit amet est.
+                Suspendisse ultrices gravida dictum fusce ut.</p>
+        </div>
+    </div>
 </div>
 
 <!-- Optional JavaScript -->
