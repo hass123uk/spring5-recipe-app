@@ -23,4 +23,9 @@ public class RecipeServiceImpl implements RecipeService {
         recipeRepository.findAll().forEach(recipes::add);
         return recipes;
     }
+
+    @Override
+    public Recipe getById(Long id) {
+        return recipeRepository.findById(id).orElseThrow();
+    }
 }

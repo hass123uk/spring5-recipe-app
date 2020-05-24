@@ -16,8 +16,7 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(MockitoExtension.class)
 class IndexControllerTest {
@@ -51,7 +50,8 @@ class IndexControllerTest {
 
         //Then
         verify(recipeService, times(1)).getAll();
-        verify(model, times(1)).addAttribute(eq("recipes"), argumentCaptor.capture());
+        verify(model, times(1))
+                .addAttribute(eq("recipes"), argumentCaptor.capture());
         assertEquals(recipes.size(), argumentCaptor.getValue().size());
         assertEquals("index", result);
     }
@@ -62,5 +62,19 @@ class IndexControllerTest {
         indexMockMvc.perform(get("/"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("index"));
+    }
+
+    @Test
+    void getRecipePage_validId_returnRecipe() throws Exception {
+        var recipe = Recipe.builder().id(1L).build();
+
+        when(recipeService.getById(1L)).thenReturn(recipe);
+
+        var indexMockMvc = MockMvcBuilders.standaloneSetup(indexController).build();
+
+        indexMockMvc.perform(get("/recipe/" + recipe.getId()))
+                .andExpect(status().isOk())
+                .andExpect(view().name("recipe"))
+                .andExpect(model().attribute("recipe", recipe));
     }
 }

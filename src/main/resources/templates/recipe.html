@@ -11,31 +11,16 @@
           rel="stylesheet"
           th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
 
-    <title>Recipe Home</title>
+    <title>Recipe</title>
 </head>
 <body>
-<div class="container-fluid">
-    <h1 class="display-4 mt-4" th:text="'My Recipes!'">
-        Index
-    </h1>
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Description</th>
-            <th scope="col">View</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="recipe : ${recipes}">
-            <td scope="row" th:text="${recipe.getId()}">ID Placeholder</td>
-            <td th:text="${recipe.getDescription()}">Description Placeholder</td>
-            <td><a href="#" th:href="@{'/recipe/' + ${recipe.getId()}}">View</a></td>
 
-        </tr>
-        </tbody>
-    </table>
+<div class="container-fluid">
+    <h1 th:text="${recipe.getId()}">
+        ID placeholder
+    </h1>
 </div>
+
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script crossorigin="anonymous"
