@@ -26,6 +26,7 @@
                 </div>
                 <div class="col-9">
                     <ul class="list-group list-group-horizontal">
+                        <!--/*@thymesVar id="category" type="com.hassanmahmud.hmrecipeproject.domain.Category"*/-->
                         <li class="list-group-item"
                             th:each="category : ${recipe.getCategories()}"
                             th:text="${category.getDescription()}">
@@ -74,6 +75,7 @@
         </div>
         <div class="card-body">
             <ul class="list-group">
+                <!--/*@thymesVar id="ingredient" type="com.hassanmahmud.hmrecipeproject.domain.Ingredient"*/-->
                 <li class="list-group-item"
                     th:each="ingredient : ${recipe.getIngredients()}"
                     th:text="${ingredient.prettyPrint()}">1 Cup of Milk
